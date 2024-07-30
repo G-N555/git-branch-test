@@ -12,13 +12,6 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Fetch PRs merged into dev
-        id: fetch_prs
-        run: |
-          PRS=$(gh pr list -s merged -B dev --json title,number,mergedAt --jq 'sort_by(.mergedAt) | reverse | .[] | "- [PR #\(.number)] \(.title) (merged on \(.mergedAt))"' )
-          echo "$PRS" > release_notes.txt
-          echo "::set-output name=release_notes::$PRS"
-
       - name: Get latest tag
         id: get_latest_tag
         run: echo "::set-output name=tag::$(git describe --tags --abbrev=0 --match "v[0-9]*" || echo 'v0.0.0')"
