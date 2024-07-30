@@ -10,6 +10,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get latest tag
+        id: get_latest_tag
+        run: echo "::set-output name=tag::$(git describe --tags --abbrev=0 --match "v[0-9]*" || echo 'v0.0.0')"
+
+      - name: Generate new tag
+        id: generate_new_tag
+        run: |
+          latest_tag=${{ steps.get_latest_tag.outputs.tag }}
+          version=${latest_tag:1}
+          IFS='.' read -r -a version_parts <<< "$version"
+          major=${version_parts[0]}
+          minor=${version_parts[1]}
+          patch=${version_parts[2]}
+
+          case ${{ github.event.head_commit.message }} in
+            *#major_release*)
+              new_major=$((major + 1))
+              new_minor=0
+              new_patch=0
+              ;;
+            *#minor_release*)
+              new_major=$major
+              new_minor=$((minor + 1))
+              new_patch=0
+              ;;
+            *#patch_release*)
+              new_major=$major
+              new_minor=$minor
+              new_patch=$((patch + 1))
+              ;;
+            *)
+              echo "Unknown branch type, not updating version"
+              exit 1
+              ;;
+          esac
+
+          new_tag="v${new_major}.${new_minor}.${new_patch}"
+          echo "::set-output name=new_tag::$new_tag"
+
       - name: Create Release Note
         uses: actions/create-release@v1
         with:
