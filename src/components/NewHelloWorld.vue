@@ -8,6 +8,7 @@
   <div>dev commit2</div>
   <div>dev commi3</div>
   <div>dev commi4</div>
+  <div>dev commi5</div>
 </template>
 
 <style></style>
