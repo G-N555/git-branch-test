@@ -12,6 +12,7 @@
   <div>HOT FIX OCCURED!!</div>
   <div>dev commi6</div>
   <div>dev commi7</div>
+  <div>dev commi8</div>
 </template>
 
 <style></style>
