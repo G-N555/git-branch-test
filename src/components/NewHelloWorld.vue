@@ -10,6 +10,7 @@
   <div>dev commi4</div>
   <div>dev commi5</div>
   <div>HOT FIX OCCURED!!</div>
+  <div>dev commi6</div>
 </template>
 
 <style></style>
