@@ -16,6 +16,7 @@ const count = ref(0);
       commit, commit2, commit3
       <code>components/HelloWorld.vue</code> to test HMR commit1 some test
     </p>
+    <div>HOTFIX2!</div>
   </div>
 
   <p>
