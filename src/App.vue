@@ -11,6 +11,7 @@ import HelloWorld from "./components/HelloWorld.vue";
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
       new change
     </a>
+    <p>This sentence is added as hotfix</p>
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
